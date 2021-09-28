@@ -3,7 +3,11 @@ BINARY_NAME=hyperkube
 
 all: build
 build:
-	go build -mod vendor -o hyperkube -tags="dockerless,providerless" -ldflags="-s -w" cmd/hyperkube/main.go
+	mkdir -p bin
+	go build -mod vendor -o bin/containerd -tags="dockerless,providerless,ctrd" -ldflags="-s -w" cmd/hyperkube/main.go
+	ln -sf ./bin/containerd ./bin/hyperkube
+compress-release: build
+	upx --ultra-brute bin/containerd
 clean:
 	GO111MODULE=off go clean
-	rm -f $(BINARY_NAME)
+	rm -rf ./bin/

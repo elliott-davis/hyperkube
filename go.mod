@@ -3,15 +3,19 @@ module k8s.io/hyperkube
 go 1.12
 
 require (
+	github.com/containerd/containerd v1.5.5
+	github.com/containerd/fuse-overlayfs-snapshotter v1.0.3
+	github.com/containerd/stargz-snapshotter v0.8.0
+	github.com/docker/docker v20.10.7+incompatible
+	github.com/gogo/googleapis v1.4.1 // indirect
 	github.com/golangplus/bytes v0.0.0-20160111154220-45c989fe5450 // indirect
 	github.com/golangplus/fmt v0.0.0-20150411045040-2a5d6d7d2995 // indirect
-	github.com/imdario/mergo v0.3.7 // indirect
+	github.com/pkg/errors v0.9.1
 	github.com/spf13/cobra v1.1.3
 	github.com/spf13/pflag v1.0.5
 	github.com/vmware/govmomi v0.21.0 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
 	gopkg.in/gcfg.v1 v1.2.3 // indirect
-	gopkg.in/square/go-jose.v2 v2.2.2 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	k8s.io/component-base v0.22.2
 	k8s.io/kubectl v0.0.0

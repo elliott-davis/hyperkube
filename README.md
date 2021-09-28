@@ -16,6 +16,9 @@ Hyperkube is a single binary that contains subcommands for starting:
 
 `make`
 
+### Compress binary
+`make compress-release`
+
 # Running Locally
 
 `hack/local-up-cluster.sh`

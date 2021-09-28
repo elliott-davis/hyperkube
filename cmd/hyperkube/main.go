@@ -21,27 +21,37 @@ package main
 
 import (
 	goflag "flag"
+	"k8s.io/hyperkube/pkg/containerd"
 	"math/rand"
 	"os"
 	"path/filepath"
 	"time"
 
+	"github.com/docker/docker/pkg/reexec"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
 	cliflag "k8s.io/component-base/cli/flag"
 	"k8s.io/component-base/logs"
+	_ "k8s.io/component-base/metrics/prometheus/restclient"
+	_ "k8s.io/component-base/metrics/prometheus/version"
+	kubectl "k8s.io/kubectl/pkg/cmd"
 	kubeapiserver "k8s.io/kubernetes/cmd/kube-apiserver/app"
 	kubecontrollermanager "k8s.io/kubernetes/cmd/kube-controller-manager/app"
 	kubeproxy "k8s.io/kubernetes/cmd/kube-proxy/app"
 	kubescheduler "k8s.io/kubernetes/cmd/kube-scheduler/app"
 	kubelet "k8s.io/kubernetes/cmd/kubelet/app"
-	_ "k8s.io/component-base/metrics/prometheus/restclient"
-	_ "k8s.io/component-base/metrics/prometheus/version"
-	kubectl "k8s.io/kubectl/pkg/cmd"
 )
 
+func init() {
+	reexec.Register("containerd", containerd.Main)
+}
+
 func main() {
+	if reexec.Init() {
+		return
+	}
+
 	rand.Seed(time.Now().UnixNano())
 
 	hyperkubeCommand, allCommandFns := NewHyperKubeCommand()
